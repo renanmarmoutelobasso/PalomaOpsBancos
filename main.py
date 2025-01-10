@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 import subprocess
 import random
-
+from tkinter import Tk, PhotoImage
 
 # Dados iniciais para simulação
 CONFIG_FILE = "config.json"
@@ -108,7 +108,12 @@ class MainApp:
         self.config = load_config()
         self.selected_filial = self.config.get("selected_filial")
 
-        self.root.iconbitmap("ico.ico")
+        # Carregar a imagem do ícone
+        icone = PhotoImage(file="logo.png")
+
+        # Definir o ícone da janela
+        self.root.iconphoto(False, icone)
+
         self.root.title("Paloma Ops - Gerenciador de Arquivos Bancários")
         self.root.geometry("1000x900")
         self.root.resizable(True, True)
@@ -173,8 +178,9 @@ class MainApp:
             print("Filial selecionada não encontrada nos dados de configuração.")
 
 
-    def open_with_program(self, tree, file_type, script_name):
-        """Abre o arquivo relacionado com o programa Python especificado."""
+    def open_with_program(self, tree, file_type, script_path):
+        """Abre o programa relacionado (executável ou script)."""
+        # Obtém o item selecionado no TreeView
         selected_item = tree.focus()
         if not selected_item:
             messagebox.showerror("Erro", "Nenhum item selecionado!")
@@ -182,25 +188,32 @@ class MainApp:
 
         # Obtém os valores da linha selecionada
         values = tree.item(selected_item, "values")
-        numero_arquivo = values[0]
-
-        # Busca o caminho do arquivo correspondente
-        path = self.config["filiais"].get(self.selected_filial, {}).get("path")
-        filial_cnpj = self.config["filiais"].get(self.selected_filial, {}).get("cnpj", "").strip()
-        arquivos = read_files_in_path(path, file_type, filial_cnpj)
-
-        arquivo_selecionado = next((f["Caminho"] for f in arquivos if f["Numero"] == numero_arquivo), None)
-
-        if not arquivo_selecionado:
-            messagebox.showerror("Erro", f"Arquivo correspondente não encontrado para o número {numero_arquivo}.")
+        if not values:
+            messagebox.showerror("Erro", "Nenhuma informação válida selecionada!")
             return
 
+        # Obtém o número do arquivo e busca o caminho completo
+        numero_arquivo = values[0]
+        filial_cnpj = self.config["filiais"].get(self.selected_filial, {}).get("cnpj", "").strip()
+        path = self.config["filiais"].get(self.selected_filial, {}).get("path", "")
+
+        arquivos = read_files_in_path(path, file_type, filial_cnpj)
+        arquivo_selecionado = next((f for f in arquivos if f["Numero"] == numero_arquivo), None)
+
+        if not arquivo_selecionado:
+            messagebox.showerror("Erro", "Caminho do arquivo não encontrado!")
+            return
+
+        caminho_completo = arquivo_selecionado["Caminho"]
+
+        # Executa o programa com o caminho completo
         try:
-            comando = ["python", script_name, arquivo_selecionado]
-            print(f"Executando comando: {comando}")
-            subprocess.run(comando)
+            print(f"Executando {script_path} com arquivo {caminho_completo}")
+            subprocess.Popen([script_path, caminho_completo], shell=False)
         except Exception as e:
-            messagebox.showerror("Erro", f"Erro ao abrir o arquivo: {e}")
+            messagebox.showerror("Erro", f"Erro ao abrir o programa: {e}")
+
+
 
 
 
@@ -262,11 +275,12 @@ class MainApp:
         action_frame.grid(row=2, column=0, sticky="ew", padx=5, pady=5)  # Alinhado horizontalmente
 
         # Botão para abrir arquivos de remessa ou retorno
+
         if file_type == "remessa":
             remessa_button = tk.Button(
                 action_frame,
                 text="Abrir Remessa",
-                command=lambda: self.open_with_program(tree, file_type, "REMESSA.PY"),
+                command=lambda: self.open_with_program(tree, file_type, "./remessa.exe"),  # Caminho do executável
                 font=("Arial", 12)
             )
             remessa_button.pack(side=tk.RIGHT, padx=5)
@@ -274,10 +288,12 @@ class MainApp:
             retorno_button = tk.Button(
                 action_frame,
                 text="Abrir Retorno",
-                command=lambda: self.open_with_program(tree, file_type, "RETORNO.PY"),
+                command=lambda: self.open_with_program(tree, file_type, "./retorno.exe"),  # Caminho do executável
                 font=("Arial", 12)
             )
             retorno_button.pack(side=tk.RIGHT, padx=5)
+
+
 
         # Botão Copiar
         copy_button = tk.Button(
@@ -449,7 +465,6 @@ class MainApp:
         except FileNotFoundError:
             return {}
         except json.JSONDecodeError:
-            messagebox.showerror("Erro", "Erro ao carregar o arquivo status.json. Arquivo corrompido.")
             return {}
 
     def save_status(self, status_data):
