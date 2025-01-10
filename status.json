@@ -1,0 +1,116 @@
+{
+    "Paloma 1": {
+        "remessa": {
+            "0000091": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:09:08"
+            },
+            "0000098": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:11:43"
+            },
+            "0000041": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:13:21"
+            },
+            "0000042": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:12:32"
+            },
+            "0000096": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:15:12"
+            },
+            "34283507": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:17:51"
+            },
+            "0000086": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:18:35"
+            },
+            "0000188": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:28:44"
+            },
+            "0000090": {
+                "Status": "Enviado",
+                "DataAcao": "10/01/2025 00:05:56"
+            }
+        },
+        "retorno": {
+            "0001768": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:14:43"
+            },
+            "0001772": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:14:36"
+            },
+            "0001766": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:13:57"
+            },
+            "34283917": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:17:54"
+            },
+            "34283D02_rel": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:18:00"
+            },
+            "0001770": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:26:25"
+            }
+        }
+    },
+    "Paloma 3": {
+        "remessa": {
+            "0000011": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:26:34"
+            },
+            "0000004": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:26:52"
+            },
+            "0000002": {
+                "Status": "Enviado",
+                "DataAcao": "09/01/2025 18:28:35"
+            }
+        },
+        "retorno": {
+            "0002808": {
+                "Status": "Lido",
+                "DataAcao": "09/01/2025 18:28:38"
+            }
+        }
+    },
+    "dfasd": {
+        "remessa": {
+            "0000003": {
+                "Status": "Enviado",
+                "DataAcao": "10/01/2025 00:34:19"
+            },
+            "0000010": {
+                "Status": "Enviado",
+                "DataAcao": "10/01/2025 00:40:47"
+            },
+            "0000006": {
+                "Status": "Enviado",
+                "DataAcao": "10/01/2025 00:44:59"
+            }
+        },
+        "retorno": {
+            "0002805": {
+                "Status": "Lido",
+                "DataAcao": "10/01/2025 00:34:21"
+            },
+            "0002812": {
+                "Status": "Lido",
+                "DataAcao": "10/01/2025 00:40:43"
+            }
+        }
+    }
+}

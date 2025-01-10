@@ -1,0 +1,29 @@
+{
+    "selected_filial": "Paloma 1",
+    "filiais": {
+        "Paloma 1": {
+            "cnpj": "68831379000115",
+            "path": "C:/boletos/Paloma 1"
+        },
+        "Paloma 2": {
+            "cnpj": "04666747000134",
+            "path": "C:/boletos/Paloma 2"
+        },
+        "Paloma 3": {
+            "cnpj": "08545925000120",
+            "path": "C:/boletos/Paloma 3"
+        },
+        "Paloma 4": {
+            "cnpj": "20436809000178",
+            "path": "C:/boletos/Paloma 4"
+        },
+        "Paloma 5": {
+            "cnpj": "04456186000149",
+            "path": "C:/boletos/Paloma 5"
+        },
+        "Paloma 6": {
+            "cnpj": "47692887000190",
+            "path": "C:/boletos/Paloma 6"
+        }
+    }
+}
